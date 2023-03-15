@@ -148,11 +148,13 @@ namespace SayDos
                             throw new Exception($"File doesn't exist: {Path.Combine(folder, ROOT_DIRECTORY_FILE)}");
                         }
 
-                        Directory.SetCurrentDirectory(folder);
-                        Directory.SetCurrentDirectory(FOLDER_SECTOR);
+                        var currentDirectory = Directory.GetCurrentDirectory();
 
                         // Read dumped root directory info
                         var rdTable = JsonConvert.DeserializeObject<List<SayDosRootDirectory>>(new StreamReader(Path.Combine(folder, ROOT_DIRECTORY_FILE)).ReadToEnd());
+
+                        Directory.SetCurrentDirectory(folder);
+                        Directory.SetCurrentDirectory(FOLDER_SECTOR);
 
                         // Read dumped MBR header and other system data (e.g. stuff that aren't files)
                         List<byte[]> systemSectors = new();
@@ -226,6 +228,8 @@ namespace SayDos
                         byte[] final = Enumerable.Repeat((byte)0xFF, 0xB4000).ToArray();
 
                         Array.Copy(merged, 0, final, 0, merged.Length);
+
+                        Directory.SetCurrentDirectory(currentDirectory);
 
                         File.WriteAllBytes(romPath, final);
 
