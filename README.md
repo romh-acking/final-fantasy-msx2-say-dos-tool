@@ -25,11 +25,11 @@ See below for terminal usage information.
 
 ### Dumping
 ```bash
-saydos.exe "Dump" "%InputDiskImageFilePath%" "%OuputSectorAndFileFolderPath%"
+saydos.exe "Dump" "%InputDiskImageFilePath%" "%OutputSectorAndFileFolderPath%"
 ```
 
 * `InputDiskImageFilePath`: The disk image you want to extract sectors and files from
-* `OuputSectorAndFileFolderPath`: The directory you want to output the data to. The folder will need to be created for the program to run.
+* `OutputSectorAndFileFolderPath`: The directory you want to output the data to. The folder will need to be created for the program to run.
 
 ### Writing
 
